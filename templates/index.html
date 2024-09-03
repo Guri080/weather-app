@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+    <!-- <link rel="stylesheet" type="text/css" href="styles.css"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+
+<body>
+    <h1>Get Weather Forecast</h1>
+
+    <form method="POST" action="/weather">
+        <label for="location">Enter Location:</label>
+        <input type="text" id="location" name="location" required>
+        <button type="submit">Get Forecast</button>
+    </form>
+
+    {% if location_name %}
+    <h2>Current condition at <span style="color: grey;">{{ location_name }}</span></h2>
+    {% endif %}
+
+    {% if forecast_list %}
+    <div class=" forecast">
+        {% for period in forecast_list %}
+        <div class="forecast-period1">
+            <img src="{{ period.icon }}" alt="{{ period.name }}">
+            <div class="forecast-period2">
+                <h3>{{ period.name }}</h3>
+                <p>{{ period.temperature }}°F</p>
+                <p>{{ period.detailedForecast }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% elif forecast %}
+    <p>{{ forecast }}</p>
+    {% endif %}
+
+</body>
+
+</html>
