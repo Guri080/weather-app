@@ -13,16 +13,19 @@
 <body>
     <h1>Get Weather Forecast</h1>
 
+    <!-- extract location from textbox -->
     <form method="POST" action="/weather">
         <label for="location">Enter Location:</label>
         <input type="text" id="location" name="location" required>
         <button type="submit">Get Forecast</button>
     </form>
 
+    <!-- display location -->
     {% if location_name %}
     <h2>Current condition at <span style="color: grey;">{{ location_name }}</span></h2>
     {% endif %}
 
+    <!-- display weather info of the location -->
     {% if forecast_list %}
     <div class=" forecast">
         {% for period in forecast_list %}

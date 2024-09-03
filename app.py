@@ -29,6 +29,7 @@ def weather():
     grid_url = f"https://api.weather.gov/points/{latitude},{longitude}"
     grid_response = requests.get(grid_url)
     
+    # if the API respond with code 200
     if grid_response.status_code == 200:
         grid_data = grid_response.json()
         grid_id = grid_data['properties']['gridId']
@@ -42,7 +43,7 @@ def weather():
             forecast_data = forecast_response.json()
             periods = forecast_data['properties']['periods']
             
-            forecast_list = []
+            forecast_list = [] # list to store weather info of the location in the week
             for period in periods[:7]:
                 forecast_list.append({
                     "name": period['name'],
